@@ -1,0 +1,22 @@
+Package: IncrementalRMA
+Title: Affymetrix-based RMA Processing Using Fixed Parameters
+Version: 1.0.0
+Authors@R: 
+    person(given = "Steven",
+           family = "Eschrich",
+           role = c("aut", "cre"),
+           email = "Steven.Eschrich@moffitt.org",
+           comment = c(ORCID = "0000-0002-9833-2788"))
+Description: RMA (implemented in the affy package) works on a list of CEL files. Normalization is done using
+  a model derived from the CEL files. However, changing the list of CEL files changes the model and hence
+  the expression estimates.  This package calculates the model in such a way that it can be applied to
+  new data without changing. There are several approaches, including fRMA and refRMA, that implement this
+  idea. This package was based on fRMA/fRMATools but added a few new features needed for a specific project.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: Biobase,
+  affy,
+  preprocessCore
