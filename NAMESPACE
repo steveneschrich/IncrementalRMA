@@ -2,6 +2,7 @@
 
 export("%or%")
 export(calculateIncrementalRMAError)
+export(combine_and_deduplicate)
 export(incrementalRMA)
 export(medianPolishIncremental)
 export(parameterizeRMA)
