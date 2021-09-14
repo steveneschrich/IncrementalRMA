@@ -49,7 +49,7 @@ calculateIncrementalRMAError<-function(exprs, abatch, params) {
 
   stopifnot("AffyBatch of new samples and incremental expression estimates of new samples are not the same." =
               length(intersect(colnames(exprs), affy::sampleNames(abatch))) == ncol(exprs))
-  stopifnot("Params does not contain referenceCELFiles" = hasName(params, "referenceCELFiles"))
+  stopifnot("Params does not contain referenceCELFiles" = utils::hasName(params, "referenceCELFiles"))
 
   # Calculate canonical RMA on the reference CEL files plus the new CEL files. Note: we have to
   # remove duplicates so that we are getting a fair comparison with RMA. Two copies of the same
