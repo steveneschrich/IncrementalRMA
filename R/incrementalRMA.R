@@ -50,7 +50,7 @@ incrementalRMA<-function(abatch, params=NULL, calculate_error = FALSE) {
               is.null(params) |
               all(c("probeEffects","normalizationVector") %in% names(params)))
   stopifnot("Error calculation cannot be done without referenceCELFiles in params."=
-              ! calculate_error | ! utils::hasName(params, "referenceCELFiles"))
+              ! calculate_error | utils::hasName(params, "referenceCELFiles"))
   stopifnot("Parameter vector does not match AffyBatch names." =
               is.null(params) |
               identical(affy::probeNames(abatch),
