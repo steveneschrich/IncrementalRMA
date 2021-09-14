@@ -46,6 +46,60 @@
 #' calculateIncrementalRMAError(exprs,  AffyBatch, params=list(referenceCELFiles=()))
 #' }
 calculateIncrementalRMAError<-function(exprs, abatch, params) {
-  warning("calculateIncrementalRMAError is not yet implemented.")
-  NULL
+
+  stopifnot("AffyBatch of new samples and incremental expression estimates of new samples are not the same." =
+              length(intersect(colnames(exprs), affy::sampleNames(abatch))) == ncol(exprs))
+  stopifnot("Params does not contain referenceCELFiles" = hasName(params, "referenceCELFiles"))
+
+  # Calculate canonical RMA on the reference CEL files plus the new CEL files. Note: we have to
+  # remove duplicates so that we are getting a fair comparison with RMA. Two copies of the same
+  # sample would influence the original rma result.
+  canonical_rma <- affy::rma(combine_and_deduplicate(abatch, params$referenceCELFiles))
+
+  # Samples to compare are the new samples
+  samples_to_compare <- affy::sampleNames(abatch)
+
+  se <- exprs[,samples_to_compare, drop=F] - Biobase::exprs(canonical_rma)[,samples_to_compare, drop=F]
+
+
+  se
 }
+
+
+
+#' Combine and De-duplicate AffyBatch objects.
+#'
+#' @description
+#' Having two AffyBatch objects, combine them into a single AffyBatch object, paying attention to duplicates.
+#'
+#' @details
+#' Two AffyBatch objects (esets) can be combined using \code{combine} function. However, if they have
+#' several samples in common we don't want the duplicates. This tries to remove duplicates by examining
+#' both the names and the expression data for duplication.
+#'
+#' The result of this effort is to produce a single AffyBatch which combines the two objects, but with
+#' duplicates removed.
+#'
+#' @param new \code{\link[affy]{AffyBatch}} of samples to use
+#' @param ref Reference \code{\link[affy]{AffyBatch}} to merge in non-duplicates for
+#'
+#' @return An \code{\link[affy]{AffyBatch}} combining the two arguments, with duplicates removed.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' combine_and_deduplicate(Dilution, Dilution)
+#' }
+combine_and_deduplicate<-function(new, ref) {
+  stopifnot("new and ref are not AffyBatch objects." = class(new)=="AffyBatch" & class(ref)=="AffyBatch")
+
+  # For each suspected duplicate, check if it is then remove from reference set.
+  duplicates <- sapply(Biobase::sampleNames(ref), function(d) {
+    d %in% Biobase::sampleNames(new) &&
+      identical(Biobase::exprs(new)[,d],Biobase::exprs(ref)[,d])
+  })
+
+  Biobase::combine(new, ref[, !duplicates])
+
+}
+
