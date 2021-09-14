@@ -62,17 +62,20 @@ incrementalRMA<-function(abatch, params=NULL, calculate_error = FALSE) {
 
   ## RMA Step 1: Background correction - does not require parameterization.
   message("Background Correcting ...")
-  abatch <- affy::bg.correct.rma(abatch)
+  abatch_bg <- affy::bg.correct.rma(abatch)
 
   ## RMA Step 2: Quantile normalization - requires parameterization
   message("Normalizing ...")
-  pms <- quantileNormalizeIncremental(abatch, params)
+  pms <- quantileNormalizeIncremental(abatch_bg, params)
 
   ## RMA Step 3: Summarization with median polish - requires parameterization
   message("Summarizing ...")
   exprs <- medianPolishIncremental(pms,
-                                   probe_names = affy::probeNames(abatch),
+                                   probe_names = affy::probeNames(abatch_bg),
                                    params)
+  ### Add column names to the results, so this doesn't get lost.
+  colnames(exprs) <- affy::sampleNames(abatch_bg)
+
   ## Extra step: If CEL files used for original calculations are included
   ## in params, we can calculate error between incremental RMA and canonical RMA.
   if ( calculate_error )
