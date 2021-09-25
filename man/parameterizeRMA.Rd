@@ -7,7 +7,7 @@
 parameterizeRMA(abatch)
 }
 \arguments{
-\item{abatch}{An \code{\link{AffyBatch}} to calculate parameters on.}
+\item{abatch}{An \code{\link[affy]{AffyBatch-class}} to calculate parameters on.}
 }
 \value{
 A list containing
@@ -35,7 +35,7 @@ be used. The elements of the list currently include:
 \itemize{
 \item{\code{probeEffects}}{Row-wise effects from median polish step.}
 \item{\code{normalizationVector}}{Quantile values from quantile normalization step.}
-\item{\code{referenceCELFiles}}{An \code{\link[affy]{AffyBatch}} containing the reference cel
+\item{\code{referenceCELFiles}}{An \code{\link[affy]{AffyBatch-class}} containing the reference cel
 files (for error calculations).}
 }
 A simple test of incrementalRMA is to parameterizeRMA, then apply incrementalRMA and compare with

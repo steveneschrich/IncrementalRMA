@@ -18,7 +18,7 @@ would produce.  See \code{\link{calculateIncrementalRMAError}} for a discussion
 of the concept and interpretation.}
 }
 \value{
-A \code{\link[Biobase]{ExpressionSet}} object representing the
+A \code{\link[Biobase]{ExpressionSet-class}} object representing the
 RMA normalized AffyBatch object.
 }
 \description{

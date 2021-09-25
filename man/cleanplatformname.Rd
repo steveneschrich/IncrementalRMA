@@ -22,7 +22,7 @@ GeneChip data. Embedded in this cdf is the name of the
 platform itself. This routine cleans up the cdf and
 trims off the "cdf" on the platform name.
 
-The \code{\link[affy]{cdfName}} function extracts a cdf
+The \code{\link[affy]{AffyBatch-class} cdfName} function extracts a cdf
 and the \code{\link[affy]{cleancdfname}} function cleans
 up problems with the cdf name. However, this function goes
 beyond this by stripping off the cdf text. This code

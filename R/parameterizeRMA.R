@@ -22,13 +22,13 @@
 #' \itemize{
 #'   \item{\code{probeEffects}}{Row-wise effects from median polish step.}
 #'   \item{\code{normalizationVector}}{Quantile values from quantile normalization step.}
-#'   \item{\code{referenceCELFiles}}{An \code{\link[affy]{AffyBatch}} containing the reference cel
+#'   \item{\code{referenceCELFiles}}{An \code{\link[affy]{AffyBatch-class}} containing the reference cel
 #'   files (for error calculations).}
 #' }
 #' A simple test of incrementalRMA is to parameterizeRMA, then apply incrementalRMA and compare with
 #' using rma on the set. See the example for code to test this.
 #'
-#' @param abatch An \code{\link{AffyBatch}} to calculate parameters on.
+#' @param abatch An \code{\link[affy]{AffyBatch-class}} to calculate parameters on.
 #'
 #' @return A list containing
 #' @export

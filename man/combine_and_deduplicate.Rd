@@ -7,12 +7,12 @@
 combine_and_deduplicate(new, ref)
 }
 \arguments{
-\item{new}{\code{\link[affy]{AffyBatch}} of samples to use}
+\item{new}{\code{\link[affy]{AffyBatch-class}} of samples to use}
 
-\item{ref}{Reference \code{\link[affy]{AffyBatch}} to merge in non-duplicates for}
+\item{ref}{Reference \code{\link[affy]{AffyBatch-class}} to merge in non-duplicates for}
 }
 \value{
-An \code{\link[affy]{AffyBatch}} combining the two arguments, with duplicates removed.
+An \code{\link[affy]{AffyBatch-class}} combining the two arguments, with duplicates removed.
 }
 \description{
 Having two AffyBatch objects, combine them into a single AffyBatch object, paying attention to duplicates.
